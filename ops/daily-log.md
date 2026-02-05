@@ -6,3 +6,6 @@
 - Created GitHub repo and cloned locally
 - Created folder structure: docs, scripts, monitoring, ops
 - Created starter markdown files
+## 2026-02-05
+- Week 1 Day 1
+- Wrote initial explanation: blockchain, node, execution client
