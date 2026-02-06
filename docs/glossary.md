@@ -20,3 +20,20 @@ State is the current snapshot of Ethereum, including account balances, contract 
 ## smart contract
 A smart contract is code deployed on Ethereum that runs when called by transactions. It can store data, enforce rules, and control funds according to its programmed logic.
 
+## EVM
+The Ethereum Virtual Machine (EVM) is the runtime that executes smart contract code on Ethereum. Every execution client runs the same rules so the result of a transaction is the same for everyone.
+
+## opcode
+An opcode is a single low-level instruction the EVM can execute, like add, store data, load data, or compare values. Smart contract code ultimately runs as a sequence of opcodes.
+
+## receipt
+A transaction receipt is the result record produced after a transaction is executed and included in a block. It includes whether it succeeded, how much gas was used, and any logs that were emitted.
+
+## log
+A log is an entry emitted during transaction execution that is stored in the receipt. Logs are designed to be searched and filtered efficiently without reading full contract state.
+
+## event
+An event is a named log format defined in a smart contract. When a contract “emits an event”, it produces logs with a known structure that apps can listen to.
+
+## topic
+A topic is an indexed value stored with a log that helps filtering. Topics are commonly used to filter by event type and by indexed event parameters, making `eth_getLogs` searches faster and more precise.

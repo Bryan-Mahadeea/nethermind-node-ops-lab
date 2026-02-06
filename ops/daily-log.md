@@ -13,3 +13,5 @@
 - Week 1 Day 2
 - Read Ethereum whitepaper (light pass)
 - Added glossary definitions: account, transaction, gas, block, state, smart contract
+- Learned EVM basics (beginner level)
+- Added glossary definitions: EVM, opcode, receipt, log, event, topic
