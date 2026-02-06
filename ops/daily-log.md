@@ -9,3 +9,7 @@
 ## 2026-02-05
 - Week 1 Day 1
 - Wrote initial explanation: blockchain, node, execution client
+## 2026-02-06
+- Week 1 Day 2
+- Read Ethereum whitepaper (light pass)
+- Added glossary definitions: account, transaction, gas, block, state, smart contract
