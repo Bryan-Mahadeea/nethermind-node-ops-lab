@@ -19,3 +19,4 @@
 - Week 1 Day 3
 - Read early conceptual parts of Mastering Ethereum (transactions, EVM execution, receipts, logs)
 - Wrote docs/evm-in-plain-english.md (transaction lifecycle, receipts/logs, logs vs state)
+- Wrote docs/support-cheatsheet.md (tx stuck, node not syncing, logs missing)
