@@ -15,3 +15,7 @@
 - Added glossary definitions: account, transaction, gas, block, state, smart contract
 - Learned EVM basics (beginner level)
 - Added glossary definitions: EVM, opcode, receipt, log, event, topic
+## 2026-02-07
+- Week 1 Day 3
+- Read early conceptual parts of Mastering Ethereum (transactions, EVM execution, receipts, logs)
+- Wrote docs/evm-in-plain-english.md (transaction lifecycle, receipts/logs, logs vs state)
