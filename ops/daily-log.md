@@ -92,4 +92,45 @@ Why: shows networking is active.
 
 ### Issues
 - (If anything fails, I paste the exact error text here)
+## 2026-02-09
+- Week 1 Day 5: Connected consensus client (Teku) to execution client (Nethermind) for Ethereum mainnet post-merge sync.
+
+What I installed / used:
+- Execution client: Nethermind v1.36.0+31cb81b7 (installed via WinGet package path)
+- Consensus client: Teku v25.12.0 (C:\Teku\teku-25.12.0)
+
+Key paths:
+- Nethermind exe:
+  C:\Users\Bryan\AppData\Local\Microsoft\WinGet\Packages\Nethermind.Nethermind_Microsoft.Winget.Source_8wekyb3d8bbwe\nethermind.exe
+- Nethermind data dir:
+  C:\Nethermind\data
+- Nethermind logs:
+  C:\Nethermind\data\logs
+- JWT secret file used for Engine API auth (path only):
+  C:\Nethermind\data\keystore\jwt-secret
+- Teku binary:
+  C:\Teku\teku-25.12.0\bin\teku.bat
+- Teku data dir:
+  C:\Teku\data
+
+Commands run:
+- Start Nethermind (execution client):
+  $nm = "C:\Users\Bryan\AppData\Local\Microsoft\WinGet\Packages\Nethermind.Nethermind_Microsoft.Winget.Source_8wekyb3d8bbwe\nethermind.exe"
+  & $nm -c mainnet --data-dir "C:\Nethermind\data"
+
+- Teku attempt without checkpoint sync (failed due to weak subjectivity):
+  & "C:\Teku\teku-25.12.0\bin\teku.bat" --network=mainnet --data-path="C:\Teku\data" --ee-endpoint="http://localhost:8551" --ee-jwt-secret-file="C:\Nethermind\data\keystore\jwt-secret"
+
+- Teku with checkpoint sync (success):
+  & "C:\Teku\teku-25.12.0\bin\teku.bat" --network=mainnet --data-path="C:\Teku\data" --ee-endpoint="http://localhost:8551" --ee-jwt-secret-file="C:\Nethermind\data\keystore\jwt-secret" --checkpoint-sync-url="https://beaconstate.info"
+
+Proof that EL and CL are connected:
+- Teku:
+  - Execution Client is online
+  - Syncing started
+  - Execution Client version: Nethermind 1.36.0+31cb81b7
+
+- Nethermind:
+  - Waiting for Forkchoice message from Consensus Layer...
+  - Then started receiving ForkChoice updates, set a new pivot block, and began syncing headers/blocks.
 
