@@ -158,6 +158,7 @@ Proof that EL and CL are connected:
   * Then started receiving ForkChoice updates, set a new pivot block, and began syncing headers/blocks.
 
     Date: 2026-02-10
+
   * 
   * Week 1 Day 6: Enabled Teku REST API and verified endpoints
   * 
@@ -175,4 +176,74 @@ Proof that EL and CL are connected:
   * 
   * Nethermind Engine API: 127.0.0.1:8551 (JWT protected)
   * 
-  * Save and close Notepad.
+
+&nbsp;Create a node health check script (PowerShell)
+
+
+
+Goal:
+
+\* Create scripts/node\_health\_check.ps1 that prints:
+
+&nbsp; \* timestamp
+
+&nbsp; \* current execution layer block number (via Nethermind JSON-RPC)
+
+&nbsp; \* syncing status (via eth\_syncing)
+
+&nbsp; \* consensus layer health (via Teku REST)
+
+
+
+What this script checks:
+
+
+
+1\) Nethermind JSON-RPC (Execution Layer)
+
+\* URL: http://127.0.0.1:8545
+
+\* Calls:
+
+&nbsp; \* eth\_blockNumber  -> returns current block number (hex)
+
+&nbsp; \* eth\_syncing      -> returns false (not syncing) OR an object (syncing)
+
+
+
+2\) Teku REST API (Consensus Layer)
+
+\* URL: http://127.0.0.1:5051/eth/v1/node/health
+
+\* Note: Teku REST must be enabled when starting Teku or this will fail.
+
+
+
+How to run:
+
+\* From repo root:
+
+&nbsp; powershell -ExecutionPolicy Bypass -File .\\scripts\\node\_health\_check.ps1
+
+
+
+Important:
+
+\* If Nethermind or Teku are not running, this script will show FAIL/WARN. That is expected.
+
+\* For the checks to pass:
+
+&nbsp; \* Nethermind must be running with JSON-RPC available on 8545
+
+&nbsp; \* Teku must be running with REST enabled on 5051
+
+
+
+Files created/updated:
+
+\* scripts/node\_health\_check.ps1
+
+\* ops/daily-log.md
+
+
+
