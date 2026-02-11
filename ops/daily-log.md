@@ -177,73 +177,89 @@ Proof that EL and CL are connected:
   * Nethermind Engine API: 127.0.0.1:8551 (JWT protected)
   * 
 
-&nbsp;Create a node health check script (PowerShell)
+     Create a node health check script (PowerShell)
 
+    
 
+    Goal:
 
-Goal:
+    \* Create scripts/node\_health\_check.ps1 that prints:
 
-\* Create scripts/node\_health\_check.ps1 that prints:
+      \* timestamp
 
-&nbsp; \* timestamp
+      \* current execution layer block number (via Nethermind JSON-RPC)
 
-&nbsp; \* current execution layer block number (via Nethermind JSON-RPC)
+      \* syncing status (via eth\_syncing)
 
-&nbsp; \* syncing status (via eth\_syncing)
+      \* consensus layer health (via Teku REST)
 
-&nbsp; \* consensus layer health (via Teku REST)
+    
 
+    What this script checks:
 
+    
 
-What this script checks:
+    1\) Nethermind JSON-RPC (Execution Layer)
 
+    \* URL: http://127.0.0.1:8545
 
+    \* Calls:
 
-1\) Nethermind JSON-RPC (Execution Layer)
+      \* eth\_blockNumber  -> returns current block number (hex)
 
-\* URL: http://127.0.0.1:8545
+      \* eth\_syncing      -> returns false (not syncing) OR an object (syncing)
 
-\* Calls:
+    
 
-&nbsp; \* eth\_blockNumber  -> returns current block number (hex)
+    2\) Teku REST API (Consensus Layer)
 
-&nbsp; \* eth\_syncing      -> returns false (not syncing) OR an object (syncing)
+    \* URL: http://127.0.0.1:5051/eth/v1/node/health
 
+    \* Note: Teku REST must be enabled when starting Teku or this will fail.
 
+    
 
-2\) Teku REST API (Consensus Layer)
+    How to run:
 
-\* URL: http://127.0.0.1:5051/eth/v1/node/health
+    \* From repo root:
 
-\* Note: Teku REST must be enabled when starting Teku or this will fail.
+      powershell -ExecutionPolicy Bypass -File .\\scripts\\node\_health\_check.ps1
 
+    
 
+    Important:
 
-How to run:
+    \* If Nethermind or Teku are not running, this script will show FAIL/WARN. That is expected.
 
-\* From repo root:
+    \* For the checks to pass:
 
-&nbsp; powershell -ExecutionPolicy Bypass -File .\\scripts\\node\_health\_check.ps1
+      \* Nethermind must be running with JSON-RPC available on 8545
 
+      \* Teku must be running with REST enabled on 5051
 
+    
 
-Important:
+    Files created/updated:
 
-\* If Nethermind or Teku are not running, this script will show FAIL/WARN. That is expected.
+    \* scripts/node\_health\_check.ps1
 
-\* For the checks to pass:
+    \* ops/daily-log.md
 
-&nbsp; \* Nethermind must be running with JSON-RPC available on 8545
+    Week 1 Day 7
 
-&nbsp; \* Teku must be running with REST enabled on 5051
+    
 
+    Added log output to: ops\\logs\\node-health.log
 
+    
 
-Files created/updated:
+    Script updated: scripts\\node\_health\_check.ps1 (LogFile + Write-Out)
 
-\* scripts/node\_health\_check.ps1
+    
 
-\* ops/daily-log.md
+    Scheduled task: NethermindNodeHealthCheck every 15 minutes
 
+    
 
+    Manual trigger: schtasks /Run /TN "NethermindNodeHealthCheck"
 
